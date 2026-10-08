@@ -9,9 +9,6 @@ from app.auth import create_session, hash_password, require_seller
 from app.database import ObjectId, db
 from app.models import SellerOnboardSchema
 
-router= APIRouter(prefix="/api/onboard", tags=["onboarding"])
-UPLOAD_DIR=Path(__file__).resolve().parents[2]/"uploads"
-UPLOAD_DIR=mkdir(parents=True,exist_ok=True)
 router = APIRouter(prefix="/api/onboard", tags=["Onboarding"])
 UPLOAD_DIR = Path(__file__).resolve().parents[2] / "uploads"
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)

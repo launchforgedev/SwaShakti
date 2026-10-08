@@ -84,7 +84,7 @@ async def login(credentials: LoginRequest):
         "seller_id": account["seller_id"],
     }
 
-@route.get("/me")
+@router.get("/me")
 async def current_account(seller_id: str =Depends(require_seller)):
     return {"seller_id":seller_id}
 
