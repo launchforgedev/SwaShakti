@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Shop local products | Namma Angadi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-stone-50 text-slate-800">
+<nav class="flex flex-wrap items-center justify-between gap-3 bg-emerald-800 px-5 py-4 text-white">
+    <a href="buyer.html" class="text-xl font-bold">Namma Angadi · Marketplace</a>
+    <div class="flex gap-4 text-sm"><a href="index.html" class="underline">Seller map</a><a href="onboarding.html" class="underline">Become a seller</a></div>
+</nav>
+<main class="mx-auto max-w-7xl px-4 py-8">
+    <header class="mb-6 max-w-2xl">
+        <p class="font-semibold uppercase tracking-wide text-emerald-700">Made by local women and SHGs</p>
+        <h1 class="mt-1 text-3xl font-bold">Shop products near you</h1>
+        <p class="mt-2 text-slate-600">Browse seller listings, open a product to see its details and location, and contact the seller directly.</p>
+    </header>
+    <section class="mb-6 grid gap-3 rounded-xl bg-white p-4 shadow-sm sm:grid-cols-[1fr_220px]">
+        <label><span class="mb-1 block text-sm font-semibold">Search products and sellers</span><input id="productSearch" type="search" class="w-full rounded-lg border p-3" placeholder="Try baskets, snacks, seller name, or town"></label>
+        <label><span class="mb-1 block text-sm font-semibold">Category</span><select id="categoryFilter" class="w-full rounded-lg border p-3"><option>All</option><option>Consumables</option><option>Handicraft</option><option>Arts</option><option>Decorating Items</option><option>Others</option></select></label>
+    </section>
+    <p id="catalogStatus" role="status" class="mb-4 text-sm text-slate-600" aria-live="polite"></p>
+    <section id="productGrid" class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"></section>
+    <section id="emptyState" class="hidden rounded-xl border border-dashed bg-white p-10 text-center">
+        <h2 class="text-lg font-semibold">No products found</h2><p class="mt-1 text-sm text-slate-600">Try another search or category. Sellers' new listings appear here automatically.</p>
+    </section>
+</main>
+<script src="js/buyer.js"></script>
+</body>
+</html>

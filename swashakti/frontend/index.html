@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women Local Business Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Navigation -->
+    <nav class="bg-emerald-700 text-white p-4 shadow-lg flex justify-between items-center">
+        <h1 class="text-xl font-bold">Namma Angadi (ನಮ್ಮ ಅಂಗಡಿ)</h1>
+        <div>
+            <a href="buyer.html" class="bg-white text-emerald-800 px-3 py-1 rounded shadow text-sm font-semibold mr-2">Shop products</a>
+            <a href="onboarding.html" class="bg-white text-emerald-800 px-3 py-1 rounded shadow text-sm font-semibold mr-2">Join as seller</a>
+            <a href="login.html" class="bg-emerald-900 px-3 py-1 rounded shadow text-sm font-semibold mr-2">Seller sign in</a>
+            <a id="dashboardLink" href="dashboard.html" class="bg-emerald-900 px-3 py-1 rounded shadow text-sm font-semibold">Dashboard</a>
+        </div>
+    </nav>
+
+    <section class="container mx-auto px-4 pt-4 grid gap-3 sm:grid-cols-2">
+        <div class="rounded-lg border border-emerald-100 bg-white p-4 shadow-sm"><h2 class="font-bold text-emerald-800">For buyers</h2><p class="text-sm text-slate-600">Find nearby products, view seller details and location, then send an order request directly to the seller.</p></div>
+        <div class="rounded-lg border border-amber-100 bg-white p-4 shadow-sm"><h2 class="font-bold text-amber-800">For women sellers and SHGs</h2><p class="text-sm text-slate-600">Create a shop, list products and keep an SHG bank-linkage preparation checklist.</p><a class="text-sm font-semibold text-emerald-800 underline" href="onboarding.html">Start seller onboarding</a></div>
+    </section>
+    <!-- Main Section -->
+    <div class="container mx-auto p-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Controls & Filtering -->
+        <div class="bg-white p-4 rounded shadow">
+            <h2 class="text-lg font-bold mb-3">Filter Businesses</h2>
+            <select id="categoryFilter" class="w-full border p-2 rounded mb-4" onchange="loadMapSellers()">
+                <option value="All">All Categories</option>
+                <option value="Consumables">Consumables (Home Food/Sweets)</option>
+                <option value="Handicraft">Handicrafts</option>
+                <option value="Arts">Arts</option>
+                <option value="Decorating Items">Decorating Items</option>
+                <option value="Others">Others</option>
+            </select>
+            <input id="productFilter" class="w-full border p-2 rounded mb-3" placeholder="Find a product" oninput="loadMapSellers()">
+
+            <div id="sellerDetails" class="mt-4 p-3 border rounded bg-slate-50 hidden">
+                <h3 id="sellerName" class="font-bold text-lg text-emerald-800"></h3>
+                <p id="sellerCategory" class="text-xs text-gray-500 mb-2"></p>
+                <p id="sellerPhone" class="text-sm font-semibold"></p>
+                
+                <h4 class="font-bold text-xs uppercase mt-3 mb-1 text-gray-600">Local Delivery Contacts</h4>
+                <ul id="deliveryList" class="text-xs text-gray-700 space-y-1"></ul>
+                <p id="sellerRating" class="text-sm mt-2"></p>
+                <p id="sellerServiceMode" class="text-xs mt-1"></p>
+                <a id="googleMapsLink" href="#" target="_blank" rel="noopener noreferrer" class="inline-block text-sm text-blue-700 underline mt-2">Open this seller in Google Maps</a>
+                <ul id="sellerProducts" class="text-xs mt-2 space-y-1"></ul>
+                <label class="block text-sm mt-3">Rate this seller
+                    <select id="feedbackRating" class="border p-1 rounded"><option value="5">5 stars</option><option value="4">4 stars</option><option value="3">3 stars</option><option value="2">2 stars</option><option value="1">1 star</option></select>
+                </label>
+                <textarea id="feedbackComment" class="w-full border p-2 rounded mt-2 text-sm" placeholder="Optional feedback"></textarea>
+                <button id="feedbackButton" type="button" onclick="submitSellerFeedback()" class="w-full mt-2 bg-slate-700 text-white py-2 rounded text-sm">Send feedback</button>
+
+            </div>
+        </div>
+
+        <!-- Map Container -->
+        <div class="md:col-span-2 bg-white p-2 rounded shadow h-[500px]">
+            <p id="mapStatus" role="status" class="px-2 text-sm text-gray-600"></p>
+            <div id="map" class="w-full h-full rounded"></div>
+        </div>
+    </div>
+
+    <script>
+        const sellerId = new URLSearchParams(window.location.search).get("seller_id");
+        if (sellerId) document.getElementById("dashboardLink").href = `dashboard.html?seller_id=${encodeURIComponent(sellerId)}`;
+    </script>
+    <script src="js/map.js"></script>
+</body>
+</html>

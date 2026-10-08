@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Join as a seller | Namma Angadi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 p-6">
+    <main class="max-w-xl mx-auto bg-white p-6 rounded-lg shadow-md">
+        <a href="index.html" class="text-sm text-emerald-800 underline">← Buyer home</a>
+        <h1 class="mt-3 text-2xl font-bold">Create your seller account</h1>
+        <p class="mb-4 mt-1 text-sm text-slate-600">A student volunteer can help, or you can register yourself.</p>
+        <fieldset class="mb-4"><legend class="font-semibold">Who is helping the seller register?</legend>
+            <label class="mr-4"><input type="radio" name="onboarding_mode" value="student" checked> Student volunteer</label>
+            <label><input type="radio" name="onboarding_mode" value="self"> Seller self-registering</label>
+            <input id="student_id" class="w-full border p-2 rounded mt-2" placeholder="Student ID">
+        </fieldset>
+        <p id="voiceOutput" role="status" aria-live="polite" class="text-sm mb-3"></p>
+        <form id="onboardForm" class="space-y-3">
+            <input type="text" id="business_name" placeholder="Business name" class="w-full border p-2 rounded" required>
+            <input type="text" id="owner_name" placeholder="Owner name" class="w-full border p-2 rounded" required>
+            <input type="tel" id="phone" placeholder="WhatsApp phone number" class="w-full border p-2 rounded" required>
+            <input type="password" id="password" placeholder="Create password (at least 8 characters)" minlength="8" autocomplete="new-password" class="w-full border p-2 rounded" required>
+            <label class="block text-sm">Business category
+                <select id="category" class="w-full border p-2 rounded mt-1"><option>Handicraft</option><option>Arts</option><option>Consumables</option><option>Decorating Items</option><option>Others</option></select>
+            </label>
+            <input type="text" id="address" placeholder="Address or landmark" class="w-full border p-2 rounded" required>
+            <div class="grid grid-cols-2 gap-2"><input type="number" step="any" min="-90" max="90" id="latitude" placeholder="Latitude (GPS fills this)" class="border p-2 rounded" required><input type="number" step="any" min="-180" max="180" id="longitude" placeholder="Longitude (GPS fills this)" class="border p-2 rounded" required></div>
+            <label class="block text-sm">Business photos (student or seller can capture/upload)
+                <input id="sellerImages" type="file" accept="image/jpeg,image/png,image/webp,image/gif" capture="environment" multiple class="w-full border p-2 rounded mt-1" onchange="uploadSellerImages(this).catch(e => document.getElementById('imageStatus').textContent = e.message)">
+            </label>
+            <p id="imageStatus" role="status" class="text-xs text-slate-500"></p>
+            <button type="submit" id="registerSeller" class="w-full bg-emerald-700 text-white py-2 rounded font-bold">Create account and shop</button>
+            <p class="text-center text-sm">Already registered? <a href="login.html" class="text-emerald-800 underline">Sign in</a></p>
+        </form>
+    </main>
+    <script>
+        const updateStudentField = () => {
+            const student = document.querySelector('input[name="onboarding_mode"]:checked').value === 'student';
+            document.getElementById('student_id').disabled = !student;
+            document.getElementById('student_id').required = student;
+        };
+        document.querySelectorAll('input[name="onboarding_mode"]').forEach(input => input.addEventListener('change', updateStudentField));
+        updateStudentField();
+    </script>
+    <script src="js/onboarding.js"></script>
+</body>
+</html>
