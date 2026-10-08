@@ -8,7 +8,7 @@ from app.whatsapp_bot import create_whatsapp_link
 router = APIRouter(prefix="/api/discovery", tags=["Discovery"])
 
 @router.get("/Products")
-async def discover_products(category: str | None=None, search:str | None=None )
+async def discover_products(category: str | None=None, search:str | None=None ):
     products = await db.products.find({}).to_list(None)
     sellers = await db.sellers.find({}).to_list(None)
     seller_by_id = {str(seller["_id"]): seller for seller in sellers}
